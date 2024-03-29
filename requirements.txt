@@ -1,0 +1,5 @@
+transformers==4.39.2
+flask==3.0.2
+requests==2.31.0
+Flask-Cors==4.0.0
+sentencepiece==0.2.0
