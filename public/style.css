@@ -1,0 +1,67 @@
+body {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    color: #444444;
+    font-size: 9pt;
+    background-color: #FAFAFA;
+}
+
+.inputArea {
+    padding: 1rem;
+    max-width: 100%;
+    line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
+    flex: 1;
+    /* Unresizable */
+    resize: none;
+    /* Fix for &nbsp; */
+    white-space: pre;
+    font-size: 1.5rem;
+}
+
+.menuDiv {
+    position: absolute;
+    min-width: 5rem;
+    box-shadow: 2px 2px 1px #888;
+    z-index: 9999;
+    border: 1px solid gray;
+    background-color: white;
+    right: unset;
+    display: none;
+    font-size: 1.5rem;
+}
+
+.menuDiv[style] {
+    display: block;
+}
+
+.popupDiv {
+    padding: 0.5rem;
+    text-align: center;
+    color: black;
+    /* min-width: 8rem; */
+}
+
+.menuWord {
+    border-bottom: 1px solid gray;
+}
+
+.selected {
+    background-color: #d8d8d8;
+}
+
+.suggestion {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.suggestion span {
+    padding: 0 1rem;
+}
+
+.hidden {
+    display: none;
+}
