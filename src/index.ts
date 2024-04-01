@@ -145,7 +145,7 @@ const enToKn: Record<string, string> = {
     "z": "ಝೆಡ್"
 }
 
-function possibleSuggestions(englishWord: InputEn): TransliteratedKn[] {
+function possibleSuggestions(englishWord: InputEn) {
     // console.log('possible', englishWord);
     const corpusTrans = words[englishWord] || []
     // TODO fix transliterate return (return only some)
@@ -153,19 +153,27 @@ function possibleSuggestions(englishWord: InputEn): TransliteratedKn[] {
     const allFuncTrans = transliterate(englishWord);
 
     //console.log(allFuncTrans);
-
     const funcTrans = allFuncTrans.slice(0, 5);
     const uniqWords = new Set<string>(
         [...corpusTrans, ...funcTrans]
             .slice(0, MAX_SUGGESTIONS - 1)
     )
-
+    /*try {
+        const response = await axios.post('http://localhost:5000', {
+            word: englishWord
+        });
+        console.log(response.data);
+        const result = [response.data, ...Array.from(uniqWords)];
+        return result;
+    } catch (error) { 
+        console.error('Error: ', error);
+    }*/
     // const funcTrans = [transliterate(englishWord)];
 
     return Array.from(uniqWords);
 }
 
-function _updatePopupMenu() {
+async function _updatePopupMenu() {
 
     const coordinates = getCaretCoordinates(inputTextArea, inputTextArea.selectionEnd);
     menuDiv.style.display = 'block';
@@ -221,7 +229,7 @@ function _updatePopupMenu() {
         // [en] => [ [...[en, kn]] ]
         .map(word => [_currentWord, word])
         // [[en, kn]]
-        .slice(0, MAX_SUGGESTIONS - 3);
+        .slice(1, MAX_SUGGESTIONS - 3);
 
 
     const secondarySuggestions = corrections
@@ -238,13 +246,26 @@ function _updatePopupMenu() {
         ]]
         : [];
 
-
-    currentSuggestions = [
-        ...primarySuggestions,
-        ...secondarySuggestions,
-        ...abbreviation
-    ] as Array<Pair>;
-
+    
+        let responseString = ""
+        try {
+            const response = await axios.post('http://localhost:5000', {
+                word: wordToTransliterate
+            });
+            console.log(response.data);
+            responseString = response.data
+        } catch (error) { 
+            console.error('Error: ', error);
+        }
+        
+        const modelSuggestions = [[_currentWord, responseString]]
+    
+        currentSuggestions = [
+            ...modelSuggestions,
+            ...primarySuggestions,
+            ...secondarySuggestions,
+            ...abbreviation,
+        ] as Array<Pair>;
 
 
     /*
@@ -313,7 +334,7 @@ async function sendDatatoFlask(word: string) {
             word: word
         });
         console.log(response.data);
-    } catch (error) {
+    } catch (error) { 
         console.error('Error: ', error);
     }
 }
