@@ -29,6 +29,31 @@
           </div>
      </div>
 
+     <br>
+     <div class="float-parent-element">
+     <div class="float-child-element">
+          <button id="sugButton"><h4> + Add sugggestion</h4></button>
+     </div>
+     
+     <div id="float-child-element">
+          <button id="adminbutton" onclick><h4>Admin login</h4></button>
+     </div>
+     </div>
+
+     <div class="popup-form" role="dialog" aria-labelledby="addSuggestionTitle" aria-hidden="true">
+          <h2 id="addSuggestionTitle">Add Suggestion</h2>
+          <form id="suggestionForm" novalidate>
+            <label for="englishSuggestion">English:</label>
+            <input type="text" id="englishSuggestion" name="englishSuggestion" aria-required="true" placeholder="Enter English suggestion">
+            <br>
+            <label for="kannadaSuggestion">Kannada:</label>
+            <input type="text" id="kannadaSuggestion" name="kannadaSuggestion" aria-required="true" placeholder="Enter Kannada suggestion">
+            <br>
+            <button type="submit" id="submitButton">Submit</button>
+          </form>
+          <button id="closePopup">Close</button>
+        </div>
+        
      <script src="/bundle.js"></script>
 </body>
 

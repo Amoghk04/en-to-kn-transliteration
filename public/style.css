@@ -43,6 +43,18 @@ body {
     /* min-width: 8rem; */
 }
 
+.popup-form {
+    display: none; /* Initially hide the form */
+    position: fixed; /* Fix the form position */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the form */
+    background-color: white; /* Set background color */
+    padding: 20px; /* Add padding */
+    border: 1px solid #ccc; /* Add border */
+    z-index: 10; /* Ensure the form is on top of other elements */
+}
+
 .menuWord {
     border-bottom: 1px solid gray;
 }
@@ -51,11 +63,17 @@ body {
     background-color: #d8d8d8;
 }
 
-.suggestion {
-    margin: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+button {
+    border-radius: 5rem;
+}
+
+button:hover {
+    background-color: #888;
+    cursor: pointer;
+}
+
+button:active {
+    box-shadow: 2px 2px 1px #888;
 }
 
 .suggestion span {
