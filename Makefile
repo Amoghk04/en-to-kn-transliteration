@@ -1,5 +1,5 @@
-install:
-	npm install axios
+flask:
+	python3 flask_app/main.py
 start:
 	npm run start:dev
 deps:

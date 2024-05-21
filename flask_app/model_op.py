@@ -1,7 +1,7 @@
 from transformers import MT5ForConditionalGeneration, T5Tokenizer
 
-model_path = 'model'
-tokenizer_path = 'model'
+model_path = 'flask_app/model'
+tokenizer_path = 'flask_app/model'
 model = MT5ForConditionalGeneration.from_pretrained(model_path)
 tokenizer = T5Tokenizer.from_pretrained(tokenizer_path)
 

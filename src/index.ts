@@ -246,21 +246,27 @@ async function _updatePopupMenu() {
         : [];
 
     
-        let responseString = ""
+        let responseString = "";
+        let dbResponseString = "";
+        console.log(wordToTransliterate);
         try {
             const response = await axios.post('http://localhost:5000', {
                 word: wordToTransliterate
             });
             console.log(response.data);
-            responseString = response.data
+            responseString = response.data.modelOutput;
+            dbResponseString = response.data.databaseOutput;
         } catch (error) { 
             console.error('Error: ', error);
         }
         
         const modelSuggestions = [[_currentWord, responseString]]
-    
+        const dbSuggestions = dbResponseString ? [[_currentWord+"*", dbResponseString]]: [];
+
+        console.log(dbSuggestions);
         currentSuggestions = [
             ...modelSuggestions,
+            ...dbSuggestions,
             ...primarySuggestions,
             ...secondarySuggestions,
             ...abbreviation,
