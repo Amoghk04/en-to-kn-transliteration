@@ -1,7 +1,7 @@
 {
-  "name": "kn-transliterate",
+  "name": "no",
   "version": "1.0.0",
-  "description": "",
+  "description": "A node application along with a trained model to transliterate text from English to Kannada language",
   "main": "index.js",
   "scripts": {
     "start:dev": "webpack serve --config webpack.dev.js",
@@ -33,10 +33,16 @@
   },
   "dependencies": {
     "@types/node": "^20.10.5",
-    "axios": "^1.6.8",
+    "axios": "^1.7.2",
+    "cors": "^2.8.5",
     "csv-parse": "^5.5.3",
     "csv-parser": "^3.0.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
     "fs": "^0.0.1-security",
+    "mongoose": "^8.4.0",
+    "nodemon": "^3.1.4",
     "serve": "^14.0.1",
     "textarea-caret": "^3.1.0"
   }

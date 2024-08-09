@@ -1,60 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Transliteration</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-     <meta charset="UTF-8">
-     <meta name="viewport"
-           content="width=device-width, initial-scale=1.0">
-     <meta http-equiv="X-UA-Compatible"
-           content="ie=edge">
-     <title>Transliteration</title>
-     <link rel="stylesheet"
-           href="/style.css">
+  <body>
+    <div class="container">
+      <h1>English to Kannada Transliteration</h1>
+      <div class="container">
+        <textarea
+          id="inputArea"
+          name="inputArea"
+          class="inputArea"
+          rows="8"
+        ></textarea>
+      </div>
+      <div id="menuDiv" class="menuDiv">
+        <div id="menuWord" class="popupDiv menuWord"></div>
+        <div id="suggestions"></div>
+      </div>
+    </div>
+    <div class="container-small">
+      <button id="sugButton" class="button type1">+ Add suggestion</button>
+      <a href="adminAuth.html" class="button type1">Admin login</a>
+    </div>
 
-</head>
-
-<body>
-     <h1 style="text-align: center;">English to Kannada Transliteration</h1>
-     <div style="display: flex;">
-          <textarea id="inputArea"
-                    name="inputArea"
-                    class="inputArea"></textarea>
-
-     </div>
-     <div id="menuDiv"
-          class="menuDiv">
-          <div id="menuWord"
-               class="popupDiv menuWord"></div>
-          <div id="suggestions">
+    <div class="overlay">
+      <div
+        class="popup-form"
+        role="dialog"
+        aria-labelledby="addSuggestionTitle"
+        aria-hidden="true"
+      >
+        <h2 id="addSuggestionTitle">Add Suggestion</h2>
+        <!--<form id="suggestionForm" action="/submit" method="post">-->
+          <label for="englishSuggestion">English:</label>
+          <input
+            type="text"
+            id="englishSuggestion"
+            name="englishSug"
+            aria-required="true"
+            placeholder="Enter English suggestion"
+            required
+          />
+          <br />
+          <label for="kannadaSuggestion">Kannada:</label>
+          <input
+            type="text"
+            id="kannadaSuggestion"
+            name="kannadaSug"
+            aria-required="true"
+            placeholder="Enter Kannada suggestion"
+            required
+          />
+          <br />
+          <div class="container-small">
+            <button id="submitButton" class="button type2">
+              Submit
+            </button>
+            <button id="closePopup" class="button type2">Close</button>
           </div>
-     </div>
+        <!--</form>-->
+      </div>
+    </div>
+    <script>
+      const sugButton = document.getElementById("sugButton");
+      const popupFormOverlay = document.querySelector(".overlay");
+      const closePopupButton = document.getElementById("closePopup");
+      const submitButton = document.getElementById("submitButton");
+      const kanSug = document.getElementById("kannadaSuggestion");
+      const engSug = document.getElementById("englishSuggestion");
 
-     <br>
-     <div class="float-parent-element">
-     <div class="float-child-element">
-          <button id="sugButton"><h4> + Add sugggestion</h4></button>
-     </div>
-     
-     <div id="float-child-element">
-          <button id="adminbutton" onclick><h4>Admin login</h4></button>
-     </div>
-     </div>
+      // Open popup form on button click
+      sugButton.addEventListener("click", function (e) {
+        e.preventDefault();
+        popupFormOverlay.style.display = "flex"; // Show the form
+      });
 
-     <div class="popup-form" role="dialog" aria-labelledby="addSuggestionTitle" aria-hidden="true">
-          <h2 id="addSuggestionTitle">Add Suggestion</h2>
-          <form id="suggestionForm" novalidate>
-            <label for="englishSuggestion">English:</label>
-            <input type="text" id="englishSuggestion" name="englishSuggestion" aria-required="true" placeholder="Enter English suggestion">
-            <br>
-            <label for="kannadaSuggestion">Kannada:</label>
-            <input type="text" id="kannadaSuggestion" name="kannadaSuggestion" aria-required="true" placeholder="Enter Kannada suggestion">
-            <br>
-            <button type="submit" id="submitButton">Submit</button>
-          </form>
-          <button id="closePopup">Close</button>
-        </div>
-        
-     <script src="/bundle.js"></script>
-</body>
+      // Close popup form on close button click
+      closePopupButton.addEventListener("click", function (e) {
+        e.preventDefault();
+        engSug.value = "";
+        kanSug.value = "";
+        popupFormOverlay.style.display = "none"; // Hide the form
+      });
 
+      // Handle form submission
+      //submitButton.addEventListener("click", suggestionSubmit);
+
+      submitButton.addEventListener("click", function(e){
+        e.preventDefault();
+        const data = {englishSug:engSug.value, kannadaSug:kanSug.value};
+        engSug.value = "";
+        kanSug.value = "";
+        fetch('http://localhost:8080/submit', {
+          //mode:'no-cors',
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        })
+          .then(response => {
+            console.log('response',response)
+          })
+          .then(data => {
+            console.log('Success');
+          })
+          .catch((error) => {
+            console.log('Error:', error);
+          });
+        popupFormOverlay.style.display = 'none';
+      });
+    </script>
+    <script src=../dist/bundle.js></script>
+  </body>
 </html>

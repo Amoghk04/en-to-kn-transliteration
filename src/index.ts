@@ -8,6 +8,8 @@ import { transliterate } from './transliterateUtil';
 import axios from 'axios';
 import { NorvigSpellChecker } from './jspell';
 
+import mongoose, { Schema, Document, model, Model } from 'mongoose';
+
 const spellCheck = new NorvigSpellChecker()
 
 /**
@@ -475,7 +477,7 @@ function updateTextArea(this: HTMLTextAreaElement, event: KeyboardEvent) {
 
 // window.addEventListener('click', setCurrentWord)
 
-inputTextArea.addEventListener('keydown', updateTextArea)
+inputTextArea.addEventListener('keydown', updateTextArea);
 
 function getSuggestion() {
     if (currentSuggestions.length) {
@@ -486,6 +488,8 @@ function getSuggestion() {
     return null;
 }
 
+
+
 // inputTextArea.addEventListener('keyup', setCurrentWord)
 
 
@@ -493,51 +497,8 @@ function getSuggestion() {
 // inputTextArea.addEventListener('keypress', onTextAreaChange);
 // 15 characters long in https://gisttransserver.in/
 
+
+
+
 // ##### USER Suggestions #####
 
-const sugButton = document.getElementById('sugButton') as HTMLButtonElement;
-const popupForm = document.querySelector('.popup-form') as HTMLDivElement;
-const closePopupButton = document.getElementById('closePopup') as HTMLButtonElement;
-const submitButton = document.getElementById('submitButton') as HTMLButtonElement;
-const kanSug = document.getElementById('kannadaSuggestion') as HTMLTextAreaElement
-const engSug = document.getElementById('englishSuggestion') as HTMLTextAreaElement;
-
-//Post processing on clicking submit
-async function suggestionSubmit(event: Event) {
-    if (!kanSug.value || !engSug.value) {
-        alert("enter");
-        event.preventDefault();
-    }
-    let kannadaSuggestion = kanSug.value;
-    let englishSuggestion = engSug.value;
-
-    if (words[kannadaSuggestion]) {
-        alert("Your Suggestion already exists in the corpus so won't be added");
-        return;
-    } else {
-        try {
-            const response = await axios.post('http://localhost:5000', {
-                englishSuggestion: englishSuggestion,
-                kannadaSuggestion: kannadaSuggestion
-            });
-            if (response.status == 200) {
-                console.log("Suggestion Successfully submitted!!");
-            } else {
-                console.error('Error submitting suggestion: ',response.data);
-            }
-        } catch (error) {
-            console.error('Error: ',error);
-        }
-    }
-}
-
-// Open popup form on button click
-sugButton.addEventListener('click', function() {
-    popupForm.style.display = 'block'; // Show the form
-});
-
-submitButton.addEventListener('click', suggestionSubmit);
-// Close popup form on close button click
-closePopupButton.addEventListener('click', function() {
-popupForm.style.display = 'none'; // Hide the form
-});

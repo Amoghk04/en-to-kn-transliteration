@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Authenticator</title>
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background-color: #fff; /* Change background color to white */
+        color: #000; /* Change text color to black */
+      }
+
+      #login-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100%;
+      }
+
+      .form-group {
+        width: 300px; /* Adjust as needed */
+      }
+
+      .error-message {
+        color: red;
+      }
+
+      .libre-baskerville-regular {
+        font-family: "Libre Baskerville", serif;
+        font-weight: 400;
+        font-style: normal;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="login-form" class="container">
+      <h1 class="display-4 mb-4 libre-baskerville-regular">
+        Admin<br />Authenticator
+      </h1>
+
+      <div class="form-group">
+        <input
+          type="text"
+          id="username"
+          class="form-control mb-3"
+          placeholder="Enter username"
+        />
+        <input
+          type="password"
+          id="password"
+          class="form-control mb-3"
+          placeholder="Enter password"
+          onkeydown="checkEnter(event)"
+        />
+        <button onclick="authenticate()" class="btn btn-primary btn-block">
+          Login
+        </button>
+        <p id="error-message" class="mt-3 error-message" style="display: none">
+          Wrong username or password!
+        </p>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      function authenticate() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        if (username === "admin" && password === "pass123") {
+          window.location.href = "http://localhost:8080/admin";
+        } else {
+          document.getElementById("error-message").style.display = "block";
+        }
+      }
+
+      function checkEnter(event) {
+        if (event.keyCode === 13) {
+          // Check if Enter key is pressed
+          authenticate(); // Call authenticate function if Enter is pressed
+        }
+      }
+    </script>
+  </body>
+</html>

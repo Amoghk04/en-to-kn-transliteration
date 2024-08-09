@@ -1,85 +1,169 @@
+:root {
+  --font-sz: 1.3rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica", "Arial", sans-serif;
+  color: #444;
+  box-sizing: border-box;
+}
+.container {
+  padding: 1rem;
+}
+
+a {
+  text-decoration: none;
+}
 body {
-    font-family: 'Helvetica', 'Arial', sans-serif;
-    color: #444444;
-    font-size: 9pt;
-    background-color: #FAFAFA;
+  background-color: #fafafa;
+  font-size: var(--font-sz);
+}
+
+h1 {
+  text-align: center;
+  font-size: calc(2 * var(--font-sz));
+  margin: 1rem 0;
 }
 
 .inputArea {
-    padding: 1rem;
-    max-width: 100%;
-    line-height: 1.5;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    box-shadow: 1px 1px 1px #999;
-    flex: 1;
-    /* Unresizable */
-    resize: none;
-    /* Fix for &nbsp; */
-    white-space: pre;
-    font-size: 1.5rem;
+  padding: 1rem;
+  width: 100%;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px #999;
+  flex: 1;
+  /* Unresizable */
+  resize: none;
+  /* Fix for &nbsp; */
+  white-space: pre;
+  font-size: var(--font-sz);
+  text-wrap: wrap;
+  /*word-break: break-all;*/
 }
 
 .menuDiv {
-    position: absolute;
-    min-width: 5rem;
-    box-shadow: 2px 2px 1px #888;
-    z-index: 9999;
-    border: 1px solid gray;
-    background-color: white;
-    right: unset;
-    display: none;
-    font-size: 1.5rem;
+  position: absolute;
+  min-width: 5rem;
+  box-shadow: 2px 2px 1px #888;
+  z-index: 9999;
+  border: 1px solid gray;
+  background-color: white;
+  border-radius: 0.2rem;
+  right: unset;
+  display: none;
 }
 
 .menuDiv[style] {
-    display: block;
+  display: block;
 }
 
 .popupDiv {
-    padding: 0.5rem;
-    text-align: center;
-    color: black;
-    /* min-width: 8rem; */
-}
-
-.popup-form {
-    display: none; /* Initially hide the form */
-    position: fixed; /* Fix the form position */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Center the form */
-    background-color: white; /* Set background color */
-    padding: 20px; /* Add padding */
-    border: 1px solid #ccc; /* Add border */
-    z-index: 10; /* Ensure the form is on top of other elements */
+  padding: 0.5rem;
+  text-align: center;
+  color: black;
+  /* min-width: 8rem; */
 }
 
 .menuWord {
-    border-bottom: 1px solid gray;
+  border-bottom: 1px solid gray;
 }
 
 .selected {
-    background-color: #d8d8d8;
+  background-color: #d8d8d8;
 }
 
-button {
-    border-radius: 5rem;
+.container-small {
+  margin: 2rem auto;
+  width: fit-content;
+  display: grid;
+  /*align-items: center;
+  flex-basis: 100%;*/
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
 
-button:hover {
-    background-color: #888;
-    cursor: pointer;
+.button {
+  padding: 0.7rem 1.5rem;
+  border: none;
+  font-size: var(--font-sz);
+  text-align: center;
+  background-color: rgb(236, 236, 236);
+  box-shadow: 0 0.1rem gray;
 }
 
-button:active {
-    box-shadow: 2px 2px 1px #888;
+.type1 {
+  border: 1px solid black;
+  border-radius: 100rem;
+}
+.type2 {
+  border-radius: 0.5rem;
+  background-color: rgb(140, 140, 140);
+  color: white;
+}
+
+.type1:hover {
+  cursor: pointer;
+  background-color: rgb(245, 245, 245);
+}
+.type2:hover,
+.type2:focus {
+  cursor: pointer;
+  background-color: rgb(97, 97, 97);
+}
+.button:active {
+  transform: translateY(0.1rem);
+  box-shadow: none;
 }
 
 .suggestion span {
-    padding: 0 1rem;
+  padding: 0 1rem;
 }
 
 .hidden {
-    display: none;
+  display: none;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background-color: rgba(17, 17, 17, 0.483);
+  top: 0;
+  /*display: flex;*/
+  display: none;
+  align-items: center;
+}
+
+.popup-form {
+  padding: 3rem;
+  border-radius: 1rem;
+  outline: 0.3rem solid white;
+  outline-offset: 0.2rem;
+  background-color: white;
+  margin: auto;
+}
+
+h2 {
+  font-size: calc(1.7 * var(--font-sz));
+  margin: 0 0 3rem;
+  color: rgb(0, 0, 0);
+  text-transform: uppercase;
+}
+label {
+  display: block;
+  font-weight: 600;
+  color: rgb(109, 109, 109);
+}
+input {
+  border: none;
+  padding: 1rem;
+  background-color: rgb(243, 243, 243);
+  border-radius: 0.5rem;
+  margin: 0.2rem 0 1rem;
+  width: 100%;
+  font-size: calc(0.8 * var(--font-sz));
 }

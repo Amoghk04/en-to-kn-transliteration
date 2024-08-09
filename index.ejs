@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="adminStyles.css">
+	<title>suggestions</title>
+</head>
+<body>
+	<h1>Suggestions</h1>
+	<div class="container">
+      <select>
+        <option>10 / page</option>
+        <option>20 / page</option>
+        <option>50 / page</option>
+      </select>
+      <div class="navigate">
+        <div class="navigator prev">&#60</div>
+        <div class="navigator next">&#62</div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>English</th>
+            <th>Kannada</th>
+            <th colspan="2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+			<% for(let i=0;i<tempSuggestions.length;++i){ %>
+				<tr class="row">
+				  <td><%= (i+1) %></td>
+				  <td><%= tempSuggestions[i].englishWord %></td>
+				  <td><%= tempSuggestions[i].kannadaWord %></td>
+				  <td><button class="button accept"><img src="accept.png" alt="Accept"></button></td>
+				  <td><button class="button reject"><img src="reject.png" alt="Reject"></button></td>
+				</tr>
+			<% } %>
+        </tbody>
+      </table>
+      <div class="container flex">
+        <button class="update">Update</button>
+      </div>
+    </div>
+  <script src="admin.js"></script>
+</body>
+</html>
